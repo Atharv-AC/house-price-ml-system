@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  api:
+    build: .
+    container_name: house_price_api
+
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - ./src:/app/src
+      - ./models:/app/models
+      - ./reports:/app/reports
+
+    command: uvicorn house_price_prediction.api:app --host 0.0.0.0 --port 8000 --reload

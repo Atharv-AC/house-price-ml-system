@@ -1,0 +1,29 @@
+[project]
+name = "house-price-prediction"
+version = "0.1.0"
+description = "FastAPI house price prediction service"
+authors = [
+    { name = "Atharv Chandurkar" }
+]
+requires-python = ">=3.10"
+
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic",
+    "scikit-learn",
+    "joblib",
+    "pandas",
+    "numpy",
+    "pydantic-settings"
+]
+
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

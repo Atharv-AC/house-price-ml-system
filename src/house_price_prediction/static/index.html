@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>House Price Predictor</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="page">
+
+        <header class="header">
+            <div>
+                <p class="header-eyebrow">ML Model Interface</p>
+                <h1>House<span>Valuation</span></h1>
+            </div>
+
+            <div class="header-tag">
+                Property<br>Estimate<br>Engine v1.0
+            </div>
+
+        </header>
+
+
+        <form id="predForm">
+            <div class="form-grid">
+
+                <!-- Section 1: Location -->
+                <!-- <div class="section">
+                    <div class="section-header">
+                        <span class="section-num">01 —</span>
+                        <span class="section-title">Location</span>
+                    </div>
+                    <div class="fields wide">
+                        <div class="field">
+                            <label>City / Neighborhood</label>
+                            <input type="text" placeholder="e.g. Austin, TX" required />
+                        </div>
+                        <div class="field">
+                            <label>ZIP Code</label>
+                            <input type="text" placeholder="e.g. 78701" maxlength="10" />
+                        </div>
+                        <div class="field">
+                            <label>Property Type</label>
+                            <select required>
+                                <option value="">Select type</option>
+                                <option>Single Family</option>
+                                <option>Townhouse</option>
+                                <option>Condo / Apartment</option>
+                                <option>Multi-Family</option>
+                                <option>Land / Lot</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>School District Rating</label>
+                            <select>
+                                <option value="">Unknown</option>
+                                <option>1 – Poor</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5 – Average</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10 – Excellent</option>
+                            </select>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Section 2: Size & Structure -->
+                <div class="section">
+                    <div class="section-header">
+                        <span class="section-num">02 —</span>
+                        <span class="section-title">Size & Structure</span>
+                    </div>
+                    <div class="fields">
+                        <div class="field">
+                            <label>Living Area (sq ft)</label>
+                            <div class="range-wrap">
+                                <div class="range-val" id="sqftVal">1,500 <sup>sq ft</sup></div>
+                                <input type="range" id="sqft" min="300" max="10000" step="50" value="1500"
+                                    oninput="document.getElementById('sqftVal').innerHTML = Number(this.value).toLocaleString() + ' <sup>sq ft</sup>'" />
+                            </div>
+                        </div>
+                        <!-- <div class="field"> -->
+                        <!-- <label>Lot Size (sq ft)</label>
+                            <div class="range-wrap">
+                                <div class="range-val" id="lotVal">6,000 <sup>sq ft</sup></div>
+                                <input type="range" id="lot" min="1000" max="100000" step="500" value="6000"
+                                    oninput="document.getElementById('lotVal').innerHTML = Number(this.value).toLocaleString() + ' <sup>sq ft</sup>'" />
+                            </div> -->
+                        <!-- </div> -->
+                        <div class="field">
+                            <label>Bedrooms</label>
+                            <select id="bedrooms" required>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3" selected>3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7+</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Bathrooms</label>
+                            <select id="bathrooms" required>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3" selected>3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7+</option>
+                            </select>
+                        </div>
+                        <!-- <div class="field">
+                            <label>Year Built</label>
+                            <input type="number" placeholder="e.g. 1998" min="1800" max="2025" />
+                        </div> -->
+                        <div class="field">
+                            <label>Stories</label>
+                            <select id="stories" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3" selected>3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7+</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Parking</label>
+                            <select id="parking" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3" selected>3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7+</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Condition & Features -->
+                <div class="section">
+                    <div class="section-header">
+                        <span class="section-num">03 —</span>
+                        <span class="section-title">Condition & Features</span>
+                    </div>
+                    <div class="fields">
+                        <div class="field">
+                            <label>Guest Room</label>
+                            <select id="guest_room">
+                                <option value="yes" selected>yes</option>
+                                <option value="no">no</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Air Conditioning</label>
+                            <select id="air_conditioning">
+                                <option value="yes" selected>yes</option>
+                                <option value="no">no</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Hot Water Heater</label>
+                            <select id="hot_water_heater">
+                                <option value="yes" selected>yes</option>
+                                <option value="no">no</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Basement</label>
+                            <select id="basement">
+                                <option value="yes" selected>yes</option>
+                                <option value="no">no</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Furnishing Status</label>
+                            <select id="furnishing">
+                                <option value="yes" selected>furnished</option>
+                                <option value="no">semi-furnished</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- <div style="margin-top: 28px;">
+                        <label style="display:block; margin-bottom: 14px;">Amenities & Extras</label>
+                        <div class="toggle-group">
+                            <label class="toggle-label"><input type="checkbox" /><span>Pool</span></label>
+                            <label class="toggle-label"><input type="checkbox" checked /><span>Central
+                                    A/C</span></label>
+                            <label class="toggle-label"><input type="checkbox" /><span>Fireplace</span></label>
+                            <label class="toggle-label"><input type="checkbox" /><span>Solar Panels</span></label>
+                            <label class="toggle-label"><input type="checkbox" checked /><span>Hardwood
+                                    Floors</span></label>
+                            <label class="toggle-label"><input type="checkbox" /><span>Smart Home</span></label>
+                            <label class="toggle-label"><input type="checkbox" /><span>Home Office</span></label>
+                            <label class="toggle-label"><input type="checkbox" /><span>EV Charger</span></label>
+                            <label class="toggle-label"><input type="checkbox" /><span>New Roof</span></label>
+                            <label class="toggle-label"><input type="checkbox" /><span>Gated Community</span></label>
+                        </div>
+                    </div> -->
+                </div>
+
+                <!-- Section 4: Market Context -->
+                <div class="section">
+                    <div class="section-header">
+                        <span class="section-num">04 —</span>
+                        <span class="section-title">Market Context</span>
+                    </div>
+                    <div class="fields wide">
+                        <div class="field">
+                            <label>Nearby Comparable</label>
+                            <select id="mainroad">
+                                <option value="yes" selected>Near Mainroad</option>
+                                <option value="no">Away from Mainroad</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Access to Public Transit</label>
+                            <select id="prefarea">
+                                <option value="yes" selected>yes</option>
+                                <option value="no">no</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /form-grid -->
+
+            <!-- Submit + Result -->
+            <div class="predict-wrap">
+                <button id="btn-predict" class="btn-predict" type="button">
+                    <span id="btnTxt">Estimate Price →</span>
+                </button>
+                <div class="loading-dots" id="dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="result-card" id="resultCard">
+                    <div class="result-label">Estimated Market Value</div>
+                    <div class="result-price" id="resultPrice">—</div>
+                    <div class="result-range" id="resultRange"></div>
+                </div>
+            </div>
+
+        </form>
+        <br><br>
+        <div class="detail">
+            <details><br><a href="/static/about.html" class="glass-btn">About</a></details>
+        </div>
+
+    </div>
+
+
+
+
+    <script src="/static/script.js"></script>
+
+</body>
+
+</html>

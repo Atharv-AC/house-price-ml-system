@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — House Price Prediction ML System</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/static/about.css">
+</head>
+
+<body>
+
+  <div class="layout">
+    
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar">
+      
+      <div class="sidebar-brand">
+        <span class="sidebar-badge">ML System</span>
+        <div class="sidebar-title">House Price<br>Prediction</div>
+      </div>
+
+      <nav>
+        <div class="toc-label">Contents</div>
+        <ul class="toc">
+          <li><a href="#intro">Introduction</a></li>
+          <li><a href="#goal">Project Goal</a></li>
+          <li><a href="#journey">Learning Journey</a></li>
+
+          <li class="toc-section">
+            <div class="toc-section-label">Part I — ML Foundations</div>
+          </li>
+          <li><a href="#supervised">Supervised Learning</a></li>
+          <li><a href="#bias-variance">Bias–Variance Tradeoff</a></li>
+          <li><a href="#regularization">Regularization</a></li>
+          <li><a href="#crossval">Cross-Validation</a></li>
+          <li><a href="#metrics">Evaluation Metrics</a></li>
+          <li><a href="#log">Log Transformation</a></li>
+          <li><a href="#residuals">Residual Analysis</a></li>
+
+          <li class="toc-section">
+            <div class="toc-section-label">Part II — Architecture</div>
+          </li>
+          <li><a href="#separation">Training vs Inference</a></li>
+          <li><a href="#artifacts">Model Artifacts</a></li>
+          <li><a href="#structure">Project Structure</a></li>
+          <li><a href="#config">Configuration</a></li>
+          <li><a href="#api">FastAPI Service</a></li>
+          <li><a href="#testing">Testing Strategy</a></li>
+          <li><a href="#docker">Docker</a></li>
+          <li><a href="#health">Health & Monitoring</a></li>
+
+          <li class="toc-section">
+            <div class="toc-section-label">Part III — Frontend</div>
+          </li>
+          <li><a href="#frontend">Interaction Flow</a></li>
+          <li><a href="#fullarch">Full Architecture</a></li>
+
+          <li class="toc-section">
+            <div class="toc-section-label">Outcomes</div>
+          </li>
+          <li><a href="#skills">Skills Developed</a></li>
+          <li><a href="#future">Future Improvements</a></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-meta">
+        Coverage: <span>~89%</span><br>
+        Model: <span>Ridge Regression</span><br>
+      </div>
+    </aside>
+
+    <!-- ── MAIN ── -->
+    <main>
+
+      <!-- Hero -->
+      <div><a href="index.html" class="glass-btn">Back</a></div><br>
+      <div class="hero">
+        <div class="hero-eyebrow">ML System Engineering Guide</div>
+        <h1 class="hero-h1">
+          From Notebook<br>to <em>Production</em> ML System
+        </h1>
+        <p class="hero-desc">
+          A complete walkthrough of how this project evolved from a simple machine learning experiment
+          into a production-style ML service — covering modeling, API design, testing,
+          containerization, and a full-stack user interface.
+        </p>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-num">7</div>
+            <div class="stat-label">Stages</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">89%</div>
+            <div class="stat-label">Test Coverage</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">3</div>
+            <div class="stat-label">API Endpoints</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">4</div>
+            <div class="stat-label">Skill Domains</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────── INTRO ─────── -->
+      <div class="doc-section" id="intro">
+        <div class="section-num">§ 01</div>
+        <h2>Introduction</h2>
+        <p>
+          Machine learning projects often begin with experiments in Jupyter notebooks —
+          load a dataset, train a model, evaluate accuracy, save. Clean and simple.
+          But real-world ML systems require much more.
+        </p>
+        <div class="code-pair">
+          <div>
+            <div class="code-label">Notebook workflow</div>
+            <div class="code-block">
+              <pre>
+load dataset
+train model
+evaluate accuracy
+save model</pre>
+            </div>
+          </div>
+          <div>
+            <div class="code-label">Production requirements</div>
+            <div class="code-block">
+              <pre>
+structured architecture
+artifact management
+API-based inference
+testing + validation
+deployment infrastructure</pre>
+            </div>
+          </div>
+        </div>
+        <p>
+          This project demonstrates every step of that transformation — turning a trained Ridge Regression model into a
+          fully containerized, API-serving ML service with a web front-end.
+        </p>
+      </div>
+
+      <!-- ─────── GOAL ─────── -->
+      <div class="doc-section" id="goal">
+        <div class="section-num">§ 02</div>
+        <h2>Project Goal</h2>
+        <p>
+          The goal was not only to train a model that predicts house prices — it was to learn how
+          <strong style="color:var(--amber2)">machine learning systems are engineered</strong>.
+          This reflects the work of a Machine Learning Systems Engineer, not just a model builder.
+        </p>
+        <div class="pill-list">
+          <span class="pill amber">ML Modeling</span>
+          <span class="pill teal">Software Engineering</span>
+          <span class="pill blue">API Design</span>
+          <span class="pill">Testing Discipline</span>
+          <span class="pill red">Containerization</span>
+          <span class="pill teal">System Architecture</span>
+        </div>
+      </div>
+
+      <!-- ─────── JOURNEY ─────── -->
+      <div class="doc-section" id="journey">
+        <div class="section-num">§ 03</div>
+        <h2>Learning Journey</h2>
+        <p>The project evolved across seven deliberate stages, each introducing new engineering concepts.</p>
+        <div class="journey">
+          <div class="journey-item">
+            <div class="journey-line">
+              <div class="journey-dot"></div>
+              <div class="journey-connector"></div>
+            </div>
+            <div class="journey-content">
+              <div class="journey-stage">Stage 1</div>
+              <div class="journey-text">ML modeling foundations</div>
+            </div>
+          </div>
+          <div class="journey-item">
+            <div class="journey-line">
+              <div class="journey-dot"></div>
+              <div class="journey-connector"></div>
+            </div>
+            <div class="journey-content">
+              <div class="journey-stage">Stage 2</div>
+              <div class="journey-text">ML training pipeline</div>
+            </div>
+          </div>
+          <div class="journey-item">
+            <div class="journey-line">
+              <div class="journey-dot"></div>
+              <div class="journey-connector"></div>
+            </div>
+            <div class="journey-content">
+              <div class="journey-stage">Stage 3</div>
+              <div class="journey-text">Prediction service</div>
+            </div>
+          </div>
+          <div class="journey-item">
+            <div class="journey-line">
+              <div class="journey-dot"></div>
+              <div class="journey-connector"></div>
+            </div>
+            <div class="journey-content">
+              <div class="journey-stage">Stage 4</div>
+              <div class="journey-text">FastAPI inference API</div>
+            </div>
+          </div>
+          <div class="journey-item">
+            <div class="journey-line">
+              <div class="journey-dot"></div>
+              <div class="journey-connector"></div>
+            </div>
+            <div class="journey-content">
+              <div class="journey-stage">Stage 5</div>
+              <div class="journey-text">Testing framework</div>
+            </div>
+          </div>
+          <div class="journey-item">
+            <div class="journey-line">
+              <div class="journey-dot"></div>
+              <div class="journey-connector"></div>
+            </div>
+            <div class="journey-content">
+              <div class="journey-stage">Stage 6</div>
+              <div class="journey-text">Docker containerization</div>
+            </div>
+          </div>
+          <div class="journey-item">
+            <div class="journey-line">
+              <div class="journey-dot"></div>
+            </div>
+            <div class="journey-content">
+              <div class="journey-stage">Stage 7</div>
+              <div class="journey-text">Frontend user interface</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PART I -->
+      <div class="part-divider">
+        <div class="part-divider-line"></div>
+        <div class="part-divider-text">Part I — Machine Learning Foundations</div>
+        <div class="part-divider-line"></div>
+      </div>
+
+      <!-- ─────── SUPERVISED ─────── -->
+      <div class="doc-section" id="supervised">
+        <div class="section-num">§ 04</div>
+        <h2>Supervised Learning</h2>
+        <p>
+          Supervised learning trains a model using labeled data — pairs of input features and a known target variable.
+          The model learns patterns in those pairs and uses them to predict outcomes for unseen inputs.
+        </p>
+        <div class="code-pair">
+          <div>
+            <div class="code-label">Input features</div>
+            <div class="code-block">
+              <pre>
+area
+bedrooms
+bathrooms
+stories
+parking
+location features</pre>
+            </div>
+          </div>
+          <div>
+            <div class="code-label">Target variable</div>
+            <div class="code-block">
+              <pre>
+
+house price</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────── BIAS-VARIANCE ─────── -->
+      <div class="doc-section" id="bias-variance">
+        <div class="section-num">§ 05</div>
+        <h2>Bias–Variance Tradeoff</h2>
+        <p>Model performance depends on striking the right balance between two competing sources of error.</p>
+        <div class="code-pair">
+          <div>
+            <div class="code-label">High Bias (underfitting)</div>
+            <div class="code-block">
+              <pre>
+model too simple
+poor training performance
+poor test performance</pre>
+            </div>
+          </div>
+          <div>
+            <div class="code-label">High Variance (overfitting)</div>
+            <div class="code-block">
+              <pre>
+memorizes training data
+excellent train performance
+poor generalization</pre>
+            </div>
+          </div>
+        </div>
+        <div class="callout">
+          <strong>Goal:</strong> A good model balances bias and variance to generalize well to unseen data.
+        </div>
+      </div>
+
+      <!-- ─────── REGULARIZATION ─────── -->
+      <div class="doc-section" id="regularization">
+        <div class="section-num">§ 06</div>
+        <h2>Regularization</h2>
+        <p>
+          Regularization prevents overfitting by penalizing large model coefficients. This project uses
+          <strong style="color:var(--amber2)">Ridge Regression (L2)</strong> as its main model.
+        </p>
+        <div class="code-block">
+          <pre>
+<span class="c-cmt"># Ridge (L2) loss function</span>
+<span class="c-key">Loss</span> <span class="c-sym">=</span> <span class="c-val">Error</span> <span class="c-sym">+</span> α <span class="c-val">Σ</span>(w²)
+</pre>
+        </div>
+        <div class="pill-list">
+          <span class="pill teal">shrinks coefficients</span>
+          <span class="pill teal">reduces variance</span>
+          <span class="pill teal">keeps all features</span>
+        </div>
+      </div>
+
+      <!-- ─────── CROSS-VAL ─────── -->
+      <div class="doc-section" id="crossval">
+        <div class="section-num">§ 07</div>
+        <h2>Cross-Validation</h2>
+        <p>
+          Cross-validation evaluates how stable the model is across different data splits.
+          <code style="font-family:'IBM Plex Mono',monospace;color:var(--teal);font-size:13px">GridSearchCV</code> was
+          used
+          to automatically tune the best regularization strength (alpha).
+        </p>
+        <div class="code-block">
+          <pre>
+split dataset into k folds
+train on k−1 folds
+validate on remaining fold
+repeat across folds
+average results</pre>
+        </div>
+      </div>
+
+      <!-- ─────── METRICS ─────── -->
+      <div class="doc-section" id="metrics">
+        <div class="section-num">§ 08</div>
+        <h2>Model Evaluation Metrics</h2>
+        <p>Three complementary metrics were used to fully evaluate model performance.</p>
+        <div class="metric-row">
+          <div class="metric-card">
+            <div class="metric-card-val">R²</div>
+            <div class="metric-card-label">Explained Variance<br><span style="color:var(--muted);font-size:11px">0 =
+                poor · 1 = perfect</span></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-card-val">MAE</div>
+            <div class="metric-card-label">Mean Absolute Error<br><span style="color:var(--muted);font-size:11px">Robust
+                to outliers</span></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-card-val">RMSE</div>
+            <div class="metric-card-label">Root Mean Sq. Error<br><span
+                style="color:var(--muted);font-size:11px">Penalizes large errors</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────── LOG TRANSFORM ─────── -->
+      <div class="doc-section" id="log">
+        <div class="section-num">§ 09</div>
+        <h2>Log Transformation</h2>
+        <p>
+          House prices are often right-skewed. Applying a log transform to the target variable
+          stabilizes variance and improves regression performance.
+        </p>
+        <div class="code-pair">
+          <div>
+            <div class="code-label">During training</div>
+            <div class="code-block">
+              <pre>y_log = log(y)</pre>
+            </div>
+          </div>
+          <div>
+            <div class="code-label">At prediction time</div>
+            <div class="code-block">
+              <pre>y = exp(prediction)</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────── RESIDUALS ─────── -->
+      <div class="doc-section" id="residuals">
+        <div class="section-num">§ 10</div>
+        <h2>Residual Analysis</h2>
+        <p>
+          Residuals (Actual − Predicted) reveal whether the model captures all signal in the data.
+          An ideal residual plot shows random scatter with no visible structure.
+        </p>
+        <div class="code-block">
+          <pre>
+<span class="c-key">Ideal:</span>   random scatter · constant variance · no structure
+
+<span class="c-key">Warns:</span>   model bias · missing features · heteroscedasticity</pre>
+        </div>
+      </div>
+
+      <!-- PART II -->
+      <div class="part-divider">
+        <div class="part-divider-line"></div>
+        <div class="part-divider-text">Part II — System Architecture</div>
+        <div class="part-divider-line"></div>
+      </div>
+
+      <!-- ─────── SEPARATION ─────── -->
+      <div class="doc-section" id="separation">
+        <div class="section-num">§ 11</div>
+        <h2>Training vs Inference Separation</h2>
+        <p>
+          In production systems, training and prediction must be fully decoupled.
+          This separation ensures faster predictions, simpler deployment, and stable behavior.
+        </p>
+        <div class="code-pair">
+          <div>
+            <div class="code-label">Training pipeline</div>
+            <div class="code-block">
+              <pre>data
+  ↓
+model training
+  ↓
+saved artifact</pre>
+            </div>
+          </div>
+          <div>
+            <div class="code-label">Serving system</div>
+            <div class="code-block">
+              <pre>load model
+  ↓
+run predictions
+  ↓
+return response</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────── ARTIFACTS ─────── -->
+      <div class="doc-section" id="artifacts">
+        <div class="section-num">§ 12</div>
+        <h2>Model Artifacts</h2>
+        <p>
+          Rather than re-training on every request, the model is persisted as a joblib artifact and loaded
+          once at service startup.
+        </p>
+        <div class="code-block">
+          <pre>
+<span class="c-cmt"># Artifact path</span>
+<span class="c-str">models/latest.joblib</span>
+
+<span class="c-cmt"># Benefits</span>
+<span class="c-val">reproducibility</span>
+<span class="c-val">version tracking</span>
+<span class="c-val">deployment portability</span></pre>
+        </div>
+      </div>
+
+      <!-- ─────── STRUCTURE ─────── -->
+      <div class="doc-section" id="structure">
+        <div class="section-num">§ 13</div>
+        <h2>Clean Project Structure</h2>
+        <div class="code-block">
+          <pre>
+<span class="c-str">House-Price-Prediction/</span>
+│
+├── <span class="c-key">src/</span>
+│   └── <span class="c-key">house_price_prediction/</span>
+│       ├── <span class="c-val">api.py</span>        <span class="c-cmt"># FastAPI entrypoint</span>
+│       ├── <span class="c-val">config.py</span>     <span class="c-cmt"># Environment config</span>
+│       ├── <span class="c-val">loader.py</span>     <span class="c-cmt"># Artifact loading</span>
+│       ├── <span class="c-val">predict.py</span>    <span class="c-cmt"># Prediction logic</span>
+│       └── <span class="c-val">train.py</span>      <span class="c-cmt"># Training pipeline</span>
+│
+├── <span class="c-key">models/</span>          <span class="c-cmt"># Saved artifacts</span>
+├── <span class="c-key">reports/</span>         <span class="c-cmt"># Evaluation outputs</span>
+└── <span class="c-key">tests/</span>           <span class="c-cmt"># Test suite</span></pre>
+        </div>
+      </div>
+
+      <!-- ─────── CONFIG ─────── -->
+      <div class="doc-section" id="config">
+        <div class="section-num">§ 14–15</div>
+        <h2>Configuration & Dependency Injection</h2>
+        <p>
+          Hardcoded values are replaced with environment variables, enabling clean separation between development,
+          testing, and production configurations.
+        </p>
+        <div class="code-block">
+          <pre>
+
+<span class="c-cmt"># Environment variables</span>
+<span class="c-key">MODEL_PATH</span>   <span class="c-sym">=</span> <span class="c-str">"models/latest.joblib"</span>
+<span class="c-key">APP_ENV:</span>      <span class="c-sym">=</span> <span class="c-str">"production"</span>
+
+<span class="c-cmt"># Dependency injection</span>
+<span class="c-key">class HousePriceModel:</span>
+<span>def __init__(self, model):</span>
+        <span>self.model = model</span>
+</pre>
+
+
+
+
+</div>
+        <p>
+          The prediction service receives the model as an external dependency rather than loading it internally —
+          making components easier to test and swap.
+        </p>
+      </div>
+
+      <!-- ─────── API ─────── -->
+      <div class="doc-section" id="api">
+        <div class="section-num">§ 16</div>
+        <h2>FastAPI Inference Service</h2>
+        <p>The trained model is exposed through a lightweight FastAPI service with three endpoints.</p>
+        <div class="endpoint-list">
+          <div class="endpoint">
+            <span class="method post">POST</span>
+            <span class="endpoint-path">/predict</span>
+            <span class="endpoint-desc">Run model inference</span>
+          </div>
+          <div class="endpoint">
+            <span class="method get">GET</span>
+            <span class="endpoint-path">/health</span>
+            <span class="endpoint-desc">Service health check</span>
+          </div>
+          <div class="endpoint">
+            <span class="method get">GET</span>
+            <span class="endpoint-path">/model-info</span>
+            <span class="endpoint-desc">Version + training metrics</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────── TESTING ─────── -->
+      <div class="doc-section" id="testing">
+        <div class="section-num">§ 17–18</div>
+        <h2>Testing Strategy</h2>
+        <p>
+          Testing was implemented across multiple layers — API endpoints, business logic,
+          and model loader with mocking — reaching <strong style="color:var(--amber2)">~89% code coverage</strong>.
+        </p>
+        <div class="code-block">
+          <pre>
+<span class="c-cmt"># Test layers</span>
+<span class="c-val">API Tests</span>        <span class="c-sym">→</span>  /health · /predict
+<span class="c-val">Logic Tests</span>      <span class="c-sym">→</span>  prediction wrapper
+<span class="c-val">Loader Tests</span>     <span class="c-sym">→</span>  mocked artifact loading</pre>
+        </div>
+        <div class="callout">
+          <strong>89% coverage</strong> ensures system reliability, safe refactoring, and production stability.
+        </div>
+      </div>
+
+      <!-- ─────── DOCKER ─────── -->
+      <div class="doc-section" id="docker">
+        <div class="section-num">§ 19–20</div>
+        <h2>Docker Containerization</h2>
+        <p>
+          The inference service is fully containerized. The Dockerfile layers a Python base image,
+          installs dependencies, copies source code and model artifacts, then runs FastAPI.
+          Docker Compose simplifies local development to a single command.
+        </p>
+        <div class="code-block">
+          <pre>
+<span class="c-cmt"># Dockerfile steps</span>
+<span class="c-key">FROM</span>   python:3.11-slim
+<span class="c-key">WORKDIR</span>   /app
+<span class="c-key">COPY</span>    pyproject.toml /app
+<span class="c-key">COPY</span>    src /app/src
+<span class="c-key">RUN</span>    pip install -e .
+<span class="c-key">COPY</span>   models /app/models
+<span class="c-key">EXPOSE</span>   8000
+<span class="c-key">CMD</span>    ["uvicorn", "house_price_prediction.api:app", "--host", "0.0.0.0", "--port", "8000"]
+
+<span class="c-cmt"># Start everything</span>
+<span class="c-key">$</span> docker compose up</pre>
+        </div>
+      </div>
+
+      <!-- ─────── HEALTH ─────── -->
+      <div class="doc-section" id="health">
+        <div class="section-num">§ 21–23</div>
+        <h2>Logging, Health & Model Metadata</h2>
+        <p>
+          Structured logs track model loading, failures, and lifecycle events.
+          The <code style="font-family:'IBM Plex Mono',monospace;color:var(--teal);font-size:13px">/health</code>
+          endpoint
+          is used for monitoring and load balancer checks.
+        </p>
+        <div class="code-pair">
+          <div>
+            <div class="code-label">GET /health</div>
+            <div class="code-block">
+              <pre>
+{
+  "status": "ok",
+  "model_loaded": true
+}</pre>
+            </div>
+          </div>
+          <div>
+            <div class="code-label">GET /model-info</div>
+            <div class="code-block">
+              <pre>
+{
+  "version": "1.0.0",
+  "metrics": { ... }
+}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PART III -->
+      <div class="part-divider">
+        <div class="part-divider-line"></div>
+        <div class="part-divider-text">Part III — Frontend Application</div>
+        <div class="part-divider-line"></div>
+      </div>
+
+      <!-- ─────── FRONTEND ─────── -->
+      <div class="doc-section" id="frontend">
+        <div class="section-num">§ 24</div>
+        <h2>Frontend Interaction Flow</h2>
+        <p>
+          When a user clicks <em style="color:var(--amber2)">Estimate Price</em>, a ten-step chain connects
+          the browser to the trained model and returns a prediction.
+        </p>
+        <div class="code-block">
+          <pre>
+<span class="c-sym">1</span>  User enters house features
+<span class="c-sym">2</span>  User clicks Estimate Price
+<span class="c-sym">3</span>  JavaScript collects input values
+<span class="c-sym">4</span>  JavaScript builds JSON payload
+<span class="c-sym">5</span>  Browser sends <span class="c-key">POST</span> /predict
+<span class="c-sym">6</span>  FastAPI validates request
+<span class="c-sym">7</span>  Prediction wrapper runs model
+<span class="c-sym">8</span>  Model returns predicted price
+<span class="c-sym">9</span>  API sends response
+<span class="c-sym">10</span> Frontend displays prediction</pre>
+        </div>
+      </div>
+
+      <!-- ─────── FULL ARCH ─────── -->
+      <div class="doc-section" id="fullarch">
+        <div class="section-num">§ 25–26</div>
+        <h2>Full System Architecture</h2>
+        <div class="arch-flow">
+          <div class="arch-node">
+            <div class="arch-box highlight">Training Pipeline</div>
+          </div>
+          <div class="arch-arrow">↓</div>
+          <div class="arch-node">
+            <div class="arch-box">Model Artifact</div>
+          </div>
+          <div class="arch-arrow">↓</div>
+          <div class="arch-node">
+            <div class="arch-box">Prediction Wrapper</div>
+          </div>
+          <div class="arch-arrow">↓</div>
+          <div class="arch-node">
+            <div class="arch-box">FastAPI Service</div>
+          </div>
+          <div class="arch-arrow">↓</div>
+          <div class="arch-node">
+            <div class="arch-box">Docker Container</div>
+          </div>
+          <div class="arch-arrow">↓</div>
+          <div class="arch-node">
+            <div class="arch-box">Frontend UI</div>
+          </div>
+          <div class="arch-arrow">↓</div>
+          <div class="arch-node">
+            <div class="arch-box highlight">Users</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────── SKILLS ─────── -->
+      <div class="doc-section" id="skills">
+        <div class="section-num">§ 27–28</div>
+        <h2>Skills Developed</h2>
+        <p>This project developed skills across four engineering domains.</p>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-card-title">Machine Learning</div>
+            <div class="skill-item">Model evaluation</div>
+            <div class="skill-item">Regularization</div>
+            <div class="skill-item">Bias-variance tradeoff</div>
+            <div class="skill-item">Feature engineering</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card-title">Backend Engineering</div>
+            <div class="skill-item">FastAPI architecture</div>
+            <div class="skill-item">API design</div>
+            <div class="skill-item">Dependency injection</div>
+            <div class="skill-item">Request validation</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card-title">Software Engineering</div>
+            <div class="skill-item">Clean project structure</div>
+            <div class="skill-item">Testing discipline</div>
+            <div class="skill-item">Documentation</div>
+            <div class="skill-item">Code coverage</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card-title">DevOps</div>
+            <div class="skill-item">Docker containerization</div>
+            <div class="skill-item">Environment config</div>
+            <div class="skill-item">Structured logging</div>
+            <div class="skill-item">Deployment readiness</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────── FUTURE ─────── -->
+      <div class="doc-section" id="future">
+        <div class="section-num">§ 29</div>
+        <h2>Future Improvements</h2>
+        <div class="future-grid">
+          <div class="future-card">
+            <div class="future-card-title">CI/CD</div>
+            <div class="future-item">GitHub Actions<br>Automated testing<br>Docker image builds</div>
+          </div>
+          <div class="future-card">
+            <div class="future-card-title">Cloud Deployment</div>
+            <div class="future-item">AWS / Render<br>Fly.io / Railway<br>Managed containers</div>
+          </div>
+          <div class="future-card">
+            <div class="future-card-title">Monitoring</div>
+            <div class="future-item">Prediction logging<br>Data drift detection<br>Model performance tracking</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────── SUMMARY ─────── -->
+      <div class="doc-section summary-box">
+        <h2>Final Summary</h2>
+        <p>
+          This project demonstrates how to transform a machine learning model into a
+          <strong style="color:var(--amber2)">production-ready ML system</strong>.
+          It covers the full lifecycle — from training pipeline and model artifact management,
+          to a FastAPI inference service with automated testing and Docker containerization,
+          all the way through to a web application that lets users interact with the model directly.
+        </p>
+        <div class="pill-list" style="margin-top:20px">
+          <span class="pill amber">Training Pipeline</span>
+          <span class="pill teal">Model Artifacts</span>
+          <span class="pill blue">FastAPI Service</span>
+          <span class="pill">Automated Testing</span>
+          <span class="pill red">Docker</span>
+          <span class="pill teal">Frontend UI</span>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.doc-section').forEach(el => observer.observe(el));
+
+    // Active TOC link
+    const sections = document.querySelectorAll('.doc-section[id]');
+    const links = document.querySelectorAll('.toc a');
+
+    const tocObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`.toc a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    sections.forEach(s => tocObserver.observe(s));
+  </script>
+</body>
+
+</html>

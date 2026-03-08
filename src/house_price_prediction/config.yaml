@@ -1,0 +1,7 @@
+model:
+  type: ridge
+  alpha_grid: [0.001, 0.01, 0.1, 1, 10, 100]
+
+train:
+  test_size: 0.2
+  random_state: 42
