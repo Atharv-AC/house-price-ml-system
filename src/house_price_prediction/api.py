@@ -73,9 +73,9 @@ def home():
 
 
 # get request (root) this is the root endpoint which returns a message for testing purposes
-@app.get("/")
-def root():
-    return {"message": "House Price Prediction API! Running"}
+# @app.get("/")
+# def root():
+#     return {"message": "House Price Prediction API! Running"}
 
 
 # this function loads the model and returns it
