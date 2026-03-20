@@ -8,7 +8,7 @@ from contextlib import asynccontextmanager
 from house_price_prediction.config import settings
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-
+from fastapi.middleware.cors import CORSMiddleware
 
 
 # Initialize logging for API 
@@ -41,7 +41,13 @@ async def lifespans(app: FastAPI):
 
 app = FastAPI(lifespan=lifespans)
 
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],   # allow all for now
+    allow_credentials=False,  # VERY IMPORTANT
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # This tells FastAPI: /static/* → serve files from static folder
 # http://localhost:8000/static/style.css
@@ -89,7 +95,7 @@ def get_model():
 # post request for prediction. we have use here dependency injection 
 # which is a feature of FastAPI that allows us to inject a dependency into a function 
 # to be used as a parameter and also allows us to override the dependency
-@app.post("/predict")
+@app.post("/predict-house")
 def predict_price(features: House, model = Depends(get_model)):
     price = model.predict(features.model_dump())
     return {'Prediction' : float(price)}

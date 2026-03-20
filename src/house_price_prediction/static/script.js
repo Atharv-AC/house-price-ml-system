@@ -41,7 +41,7 @@ document.getElementById("btn-predict").addEventListener("click", async function 
 
     // 3 call API
     try {
-        const response = await fetch("/predict", {
+        const response = await fetch("/predict-house", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
