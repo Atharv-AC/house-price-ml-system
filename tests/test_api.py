@@ -44,7 +44,7 @@ def test_predict_with_fake_model(client):
     app.dependency_overrides[get_model] = fake_get_model
 
     # Send a representative payload and validate the mocked prediction response.
-    response = client.post("/predict", json={
+    response = client.post("/predict-house", json={
         "bedrooms": 4,
         "bathrooms": 2,
         "stories": 2,
@@ -74,7 +74,7 @@ def test_predict_when_model_not_loaded(client):
     app.state.model_loaded = False
 
     # The same payload should be rejected when the application reports no model.
-    response = client.post("/predict", json={
+    response = client.post("/predict-house", json={
         "bedrooms": 4,
         "bathrooms": 2,
         "stories": 2,
