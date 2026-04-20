@@ -475,7 +475,7 @@ Possible extensions:
 ### 1 Clone Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Atharv-AC/house-price-ml-system.git
 ```
 
 ## Option 1:
