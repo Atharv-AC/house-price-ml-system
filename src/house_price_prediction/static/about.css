@@ -670,7 +670,7 @@ main {
 }
 
 /* ===============================
-   ANIMATIONS & RESPONSIVE
+   ANIMATIONS
 ================================ */
 .doc-section {
   opacity: 0;
@@ -682,16 +682,6 @@ main {
 .doc-section.visible {
   opacity: 1;
   transform: translateY(0);
-}
-
-@media (max-width: 900px) {
-  .layout { grid-template-columns: 1fr; }
-  .sidebar { display: none; }
-  main { padding: 48px 24px; }
-  .hero-h1 { font-size: 44px; }
-  .code-pair, .metric-row, .skills-grid, .future-grid { grid-template-columns: 1fr; gap: 16px; }
-  .endpoint { flex-direction: column; align-items: flex-start; gap: 12px; }
-  .part-divider-text { font-size: 18px; padding: 0 16px; }
 }
 
 /* Add this to your CSS for the Sidebar Meta */
@@ -741,4 +731,23 @@ main {
 
 html {
   scroll-behavior: smooth;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { 
+    position: static; 
+    height: auto; 
+    padding: 32px 24px; 
+    border-right: none; 
+    border-bottom: 1px solid var(--border);
+  }
+  main { padding: 48px 24px; }
+  .hero-h1 { font-size: 44px; }
+  .code-pair, .metric-row, .skills-grid, .future-grid { grid-template-columns: 1fr; gap: 16px; }
+  .endpoint { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .part-divider-text { font-size: 18px; padding: 0 16px; }
 }

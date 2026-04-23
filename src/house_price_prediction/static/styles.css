@@ -318,4 +318,5 @@ input[type="range"]::-webkit-slider-thumb {
     .header { flex-direction: column; text-align: center; }
     .header-tag { text-align: center; margin-top: 15px; }
     .section { padding: 20px; }
+    .result-price { font-size: 36px; margin: 10px 0; }
 }
