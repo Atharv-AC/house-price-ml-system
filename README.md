@@ -1,4 +1,4 @@
-# 🏠 House Price Prediction — Production-Grade Machine Learning System 
+# 🏠 House Price Prediction — End-to-End Machine Learning System
 
 ![Python](https://img.shields.io/badge/python-3.11-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-API-green)
@@ -8,7 +8,7 @@
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
 ![Coverage](https://img.shields.io/badge/coverage-89%25-green)
 
-A **production-style machine learning system** that demonstrates how to move from **model training to a deployable inference API**.
+A **production-oriented machine learning system** that demonstrates how to move from **model training to a deployable inference API**.
 
 Unlike typical notebook-based ML projects, this repository focuses on **ML engineering practices**, including:
 
